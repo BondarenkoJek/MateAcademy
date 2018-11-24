@@ -6,29 +6,32 @@ import ua.bondarenkojek.lessons.core.Sort;
 public class SortTest {
     public static void main(String[] args) {
 
-        int[] testArray = createTestArr();
+        int[] testArray;
 
         long start;
         long finish;
 
-//        start = System.currentTimeMillis();
-//        Sort.bubbleSort(testArray);
-//        finish = System.currentTimeMillis();
-//
-//        System.out.println("Bubble sort time = " + (finish - start));
+        testArray = createTestArr();
+        start = System.currentTimeMillis();
+        Sort.bubbleSort(testArray);
+        finish = System.currentTimeMillis();
+        //Bubble sort time = more 10 minutes
+        System.out.println("Bubble sort time = " + (finish - start));
 
 
-//        start = System.currentTimeMillis();
-//        Sort.insertSort(testArray);
-//        finish = System.currentTimeMillis();
-//        //result = 127391
-//        System.out.println("Insert sort time = " + (finish - start));
+        testArray = createTestArr();
+        start = System.currentTimeMillis();
+        Sort.insertSort(testArray);
+        finish = System.currentTimeMillis();
+        //InsertSort time = 131130
+        System.out.println("Insert sort time = " + (finish - start));
 
 
+        testArray = createTestArr();
         start = System.currentTimeMillis();
         QuickSort.sort(testArray);
         finish = System.currentTimeMillis();
-
+        //QuickSort time = 219
         System.out.println("Quick sort time = " + (finish - start));
 
 

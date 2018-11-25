@@ -3,37 +3,36 @@ package ua.bondarenkojek.lessons.core;
 
 public class Sort {
 
-    public static int[] bubbleSort(int[] a) {
-        int[] sortArr = a;
+    public static int[] bubbleSort(int[] array) {
 
-        for (int i = 1; i < a.length; i++) {
-            for (int j = 0; j < a.length - i; j++) {
+        for (int i = 1; i < array.length; i++) {
+            for (int j = 0; j < array.length - i; j++) {
                 int temp;
 
-                if(a[j] > a[j + 1] ) {
-                    temp = a[j];
-                    a[j] = a[j + 1];
-                    a[j + 1] = temp;
+                if(array[j] > array[j + 1] ) {
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
                 }
             }
         }
-        return sortArr;
+        return array;
     }
 
 
-    public static int[] insertSort(int[] a){
+    public static int[] insertSort(int[] array){
 
-        for (int i = 1; i < a.length; i++) {
-            int temp = a[i];
+        for (int i = 1; i < array.length; i++) {
+            int temp = array[i];
             int location = i - 1;
-            while (location >= 0 && a[location] > temp) {
-                a[location + 1] = a[location];
+            while (location >= 0 && array[location] > temp) {
+                array[location + 1] = array[location];
                 location--;
             }
-            a[location + 1] = temp;
+            array[location + 1] = temp;
         }
 
-        return a;
+        return array;
     }
 
 }

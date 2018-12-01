@@ -18,5 +18,7 @@ public class Main {
             machine.doWork();
         });
 
+        new Object().hashCode();
+
     }
 }

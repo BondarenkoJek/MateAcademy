@@ -2,11 +2,9 @@ package ua.bondarenkojek.lessons.core;
 
 import java.io.*;
 
-
 public class Stream {
     public static void main(String[] args) {
         File file = new File("tmp.txt");
-
 
         try(FileWriter stream = new FileWriter(file)) {
 

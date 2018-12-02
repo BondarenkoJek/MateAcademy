@@ -1,6 +1,5 @@
 package ua.bondarenkojek.lessons.core;
 
-
 public class Sort {
 
     public static int[] bubbleSort(int[] array) {
@@ -19,7 +18,6 @@ public class Sort {
         return array;
     }
 
-
     public static int[] insertSort(int[] array){
 
         for (int i = 1; i < array.length; i++) {
@@ -34,5 +32,4 @@ public class Sort {
 
         return array;
     }
-
 }

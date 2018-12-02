@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.core;
 
-
 import java.io.*;
 
 public class Files {
@@ -38,6 +37,5 @@ public class Files {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

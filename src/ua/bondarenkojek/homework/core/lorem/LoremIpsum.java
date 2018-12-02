@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.core.lorem;
 
-
 import java.io.*;
 
 public class LoremIpsum {

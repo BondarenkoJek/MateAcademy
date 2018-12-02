@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.core;
 
-
 public class Matrix {
     public static void main(String[] args) {
 
@@ -24,7 +23,6 @@ public class Matrix {
             System.out.println();
         }
 
-
         System.out.println();
         //Mirror image matrix
         matrix = mirrorImage(matrix);
@@ -35,21 +33,14 @@ public class Matrix {
             }
             System.out.println();
         }
-
-
-
-
     }
-
 
     public static int[][] mirrorImage(int[][] arr) {
 
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
-
                 if (i == j)
                     break;
-
                 int tmp = arr[i][j];
                 arr[i][j] = arr[j][i];
                 arr[j][i] = tmp;
@@ -57,5 +48,4 @@ public class Matrix {
         }
         return arr;
     }
-
 }

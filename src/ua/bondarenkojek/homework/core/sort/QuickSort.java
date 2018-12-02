@@ -1,5 +1,6 @@
 package ua.bondarenkojek.homework.core.sort;
 
+
 public class QuickSort {
 
     private static int[] array;
@@ -40,4 +41,5 @@ public class QuickSort {
         doSort(first, mainPoint);
         doSort(mainPoint+1, last);
     }
+
 }

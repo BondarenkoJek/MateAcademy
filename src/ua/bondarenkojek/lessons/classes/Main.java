@@ -1,5 +1,6 @@
 package ua.bondarenkojek.lessons.classes;
 
+
 public class Main {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException {
 //        Outer.Inner inner = new Outer().new Inner();

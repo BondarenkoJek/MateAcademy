@@ -23,9 +23,12 @@ public class Factorial {
         } catch (IOException e) {
             System.err.println("Invalid number, try again!");
         }
+
+
     }
 
     static int fac(int n) {
         return n == 1 ? 1 : fac(n-1) * n;
     }
+
 }

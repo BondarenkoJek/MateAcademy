@@ -136,7 +136,6 @@ public class ViewCar {
 
     }
 
-
     private static boolean isIntegerNumeric(String str) {
         return str.matches("-?\\d");
     }

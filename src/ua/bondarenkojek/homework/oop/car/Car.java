@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.oop.car;
 
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,6 +16,7 @@ public class Car {
     private int amountPassengers;
     private List<CarWheel> wheels;
     private List<CarDoor> doors;
+    private static final double MAX_WHEEL_STATE = 1.0;
 
     public Car(Date creationDate) {
         this.creationDate = creationDate;
@@ -37,7 +37,6 @@ public class Car {
         this.maxSpeed = maxSpeed;
         this.accelerationTime = accelerationTime;
         this.maxAmountPassengers = maxAmountPassengers;
-
     }
 
     public boolean changeSpeed(double speed) {
@@ -103,7 +102,7 @@ public class Car {
         }
 
         //temp variable
-        double minWheelState = 1.0;
+        double minWheelState = MAX_WHEEL_STATE;
 
         for (CarWheel wheel : wheels) {
             if (wheel.getWheelState() < minWheelState) {
@@ -162,5 +161,4 @@ public class Car {
         DIESEL,
         ELECTRIC
     }
-
 }

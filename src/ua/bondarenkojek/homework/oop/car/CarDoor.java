@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.oop.car;
 
-
 public class CarDoor {
 
     private boolean doorState;

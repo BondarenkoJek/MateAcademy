@@ -143,5 +143,4 @@ public class ViewCar {
     private static boolean isDoubleNumeric(String str) {
         return str.matches("-?\\d+(\\.\\d+)?");
     }
-
 }

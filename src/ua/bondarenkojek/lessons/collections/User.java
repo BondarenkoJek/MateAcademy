@@ -1,8 +1,5 @@
 package ua.bondarenkojek.lessons.collections;
 
-/**
- * Created by jek on 12/1/18.
- */
 public class User {
     private String name;
     private int age;
@@ -48,7 +45,6 @@ public class User {
             return false;
         }
 
-
         User user = (User) obj;
 
         if (this.age != user.age) {
@@ -65,6 +61,4 @@ public class User {
 
         return true;
     }
-
-
 }

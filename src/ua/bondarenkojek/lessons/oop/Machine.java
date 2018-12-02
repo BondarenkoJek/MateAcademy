@@ -1,6 +1,5 @@
 package ua.bondarenkojek.lessons.oop;
 
-
 public abstract class Machine {
 
     private boolean wasStarted = false;

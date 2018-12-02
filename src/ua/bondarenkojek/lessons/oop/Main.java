@@ -1,7 +1,5 @@
 package ua.bondarenkojek.lessons.oop;
 
-
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +17,5 @@ public class Main {
         });
 
         new Object().hashCode();
-
     }
 }

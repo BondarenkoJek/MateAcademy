@@ -1,8 +1,5 @@
 package ua.bondarenkojek.lessons.collections;
 
-/**
- * Created by jek on 12/1/18.
- */
 public class Main {
     public static void main(String[] args) {
         User user1 = new User("Jek", 26, "Bulgakova");
@@ -24,6 +21,5 @@ public class Main {
         System.out.println(user1.equals(user2));
         System.out.println(user2.equals(user1));
         System.out.println(user1.equals(user1));
-
     }
 }

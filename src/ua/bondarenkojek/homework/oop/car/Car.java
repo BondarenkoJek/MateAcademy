@@ -138,7 +138,6 @@ public class Car {
         }
     }
 
-
     public void setType(EngineType type) {
         this.type = type;
     }

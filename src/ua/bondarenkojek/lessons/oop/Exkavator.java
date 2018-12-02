@@ -1,6 +1,5 @@
 package ua.bondarenkojek.lessons.oop;
 
-
 public class Exkavator extends Machine {
     @Override
     public void drive() {

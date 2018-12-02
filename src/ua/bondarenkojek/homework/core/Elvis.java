@@ -1,8 +1,6 @@
 package ua.bondarenkojek.homework.core;
 
-
 public class Elvis {
-
     public static void main(String[] args) {
 
         //Test
@@ -15,11 +13,9 @@ public class Elvis {
 
     }
 
-
     public static int matchResult(int firstTeamScore, int secondTeamScore, int firstRate, int secondRate) {
         return (firstTeamScore == firstRate && secondTeamScore == secondRate) ? 2 :
                 ((firstTeamScore > secondTeamScore  && firstRate > secondRate) ||
                 (firstTeamScore < secondTeamScore  && firstRate < secondRate)) ? 1 : 0;
     }
-
 }

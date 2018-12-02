@@ -1,6 +1,5 @@
 package ua.bondarenkojek.homework.core.lorem;
 
-
 import java.io.*;
 
 public class LoremIpsum {
@@ -22,7 +21,6 @@ public class LoremIpsum {
 
         inText = inText.replaceAll("[^a-zA-Z]", " ");
         String[] words = inText.split(" ");
-
 
         try(FileWriter stream = new FileWriter(outFile)) {
 

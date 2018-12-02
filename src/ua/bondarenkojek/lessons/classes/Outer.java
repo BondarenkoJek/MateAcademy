@@ -1,6 +1,5 @@
 package ua.bondarenkojek.lessons.classes;
 
-
 public class Outer {
     private int number;
     private static int staticNumber;
@@ -9,7 +8,6 @@ public class Outer {
         return new Anonymous() {
         };
     }
-
 
     public Local getLocalClass() {
 
@@ -28,8 +26,6 @@ public class Outer {
         return new LocalClass();
     }
 
-
-
     public class Inner {
         public int getNumber() {
             return number;
@@ -42,7 +38,6 @@ public class Outer {
 
     public static class StaticInner {
         public int getNumber() {
-
             return staticNumber;
         }
 

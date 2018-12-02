@@ -1,13 +1,11 @@
 package ua.bondarenkojek.homework.core;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Romb {
     public static void main(String[] args) {
-
         int size = 0;
 
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
@@ -27,11 +25,9 @@ public class Romb {
             }
 
             drawRomb(size);
-
     }
 
     public static void drawRomb(int size) {
-
         int center = size/2;
         int stars = 0;
 
@@ -42,7 +38,6 @@ public class Romb {
                         System.out.print(" ");
                      else
                         System.out.print("*");
-
                 }
 
             System.out.println();
@@ -53,8 +48,6 @@ public class Romb {
             else {
                 stars--;
             }
-
         }
     }
-
 }

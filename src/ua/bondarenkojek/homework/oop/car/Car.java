@@ -16,25 +16,23 @@ public class Car {
     private int maxAmountPassengers;
     private int amountPassengers;
     private List<CarWheel> wheels;
-    private CarDoor[] doors;
+    private List<CarDoor> doors;
 
     public Car(Date creationDate) {
         this.creationDate = creationDate;
         this.wheels = new ArrayList<>();
-        this.doors = new CarDoor[4];
+        this.doors = new ArrayList<>();
         this.speed = 0;
 
         for (int i = 0; i < 4; i++) {
             wheels.add(new CarWheel());
-            doors[i] = new CarDoor();
+            doors.add(new CarDoor());
         }
     }
 
     public Car(Date creationDate, EngineType type, double maxSpeed, double accelerationTime,
                int maxAmountPassengers) {
-
         this(creationDate);
-
         this.type = type;
         this.maxSpeed = maxSpeed;
         this.accelerationTime = accelerationTime;
@@ -82,24 +80,21 @@ public class Car {
     }
 
     public CarDoor getCarDoor(int doorIndex) {
-        if (doorIndex > doors.length) {
+        if (doorIndex > doors.size()) {
             return null;
         }
-        return doors[doorIndex - 1];
+        return doors.get(doorIndex-1);
     }
 
-    public boolean removeAllWhels() {
+    public void removeAllWheels() {
         if (wheels.size() > 0) {
             wheels.clear();
-            return true;
         }
-        return false;
+        throw new NullPointerException("Car without wheels");
     }
 
-    public void putOnWheels(int amountWheels) {
-        for (int i = 0; i < amountWheels; i++) {
-            wheels.add(new CarWheel());
-        }
+    public void putOnWheels(List<CarWheel> wheels) {
+        this.wheels.addAll(wheels);
     }
 
     public double getRealMaxSpeed() {
@@ -107,6 +102,7 @@ public class Car {
             return 0;
         }
 
+        //temp variable
         double minWheelState = 1.0;
 
         for (CarWheel wheel : wheels) {

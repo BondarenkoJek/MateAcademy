@@ -1,14 +1,11 @@
 package ua.bondarenkojek.homework.oop.car;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Date;
 
-
 public class ViewCar {
-
 
     public static void main(String[] args) {
 
@@ -117,8 +114,6 @@ public class ViewCar {
                     default:
                         System.err.println("Invalid choice, try again!");
                 }
-
-
             }
         } catch (IOException e) {
             e.printStackTrace();

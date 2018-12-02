@@ -25,7 +25,7 @@ public class CarDoor {
     }
 
     public void openCloseDoor() {
-        doorState = doorState ? false : true;
+        doorState = !doorState;
     }
 
     public void openWindow() {
@@ -37,7 +37,7 @@ public class CarDoor {
     }
 
     public void openCloseWindow() {
-        windowState = windowState ? false : true;
+        windowState = !windowState;
     }
 
     public void showState() {

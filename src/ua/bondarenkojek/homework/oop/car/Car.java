@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Car {
-
     private final Date creationDate;
     private EngineType type;
     private double maxSpeed;

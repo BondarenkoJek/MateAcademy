@@ -1,7 +1,6 @@
 package ua.bondarenkojek.homework.oop.car;
 
 public class CarWheel {
-
     private double wheelState;
 
     public CarWheel() {

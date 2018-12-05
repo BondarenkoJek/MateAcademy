@@ -1,4 +1,4 @@
-package ua.bondarenkojek.lessons.collections;
+package ua.bondarenkojek.lessons.collections.equals;
 
 public class Main {
     public static void main(String[] args) {

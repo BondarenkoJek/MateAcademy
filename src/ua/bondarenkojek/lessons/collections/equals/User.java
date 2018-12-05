@@ -1,4 +1,4 @@
-package ua.bondarenkojek.lessons.collections;
+package ua.bondarenkojek.lessons.collections.equals;
 
 public class User {
     private String name;

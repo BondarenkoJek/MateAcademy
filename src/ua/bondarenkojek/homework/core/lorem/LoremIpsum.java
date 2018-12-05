@@ -9,24 +9,23 @@ public class LoremIpsum {
 
         String inText = "";
 
-        try(BufferedReader reader = new BufferedReader( new InputStreamReader(new FileInputStream(inFile)))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(inFile)))) {
 
             while (reader.ready()) {
-               inText+=reader.readLine();
+                inText += reader.readLine();
             }
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         inText = inText.replaceAll("[^a-zA-Z]", " ");
         String[] words = inText.split(" ");
 
-        try(FileWriter stream = new FileWriter(outFile)) {
+        try (FileWriter stream = new FileWriter(outFile)) {
 
             for (String word : words) {
                 if (word.length() > 3)
-                stream.write(word + "\n");
+                    stream.write(word + "\n");
             }
 
         } catch (IOException e) {

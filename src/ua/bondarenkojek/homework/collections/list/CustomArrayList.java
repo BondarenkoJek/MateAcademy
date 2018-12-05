@@ -21,11 +21,6 @@ public class CustomArrayList<E> implements List<E> {
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
     public boolean add(E element) {
         ensureCapacity(size + 1);
         data[size++] = element;
@@ -62,6 +57,17 @@ public class CustomArrayList<E> implements List<E> {
         }
         size--;
         return element;
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        for (int i = 0; i < size; i++) {
+            if (data[i].equals(o)) {
+                remove(i);
+                return true;
+            }
+        }
+        return false;
     }
 
     private void ensureCapacity(int capacity) {

@@ -64,14 +64,14 @@ public class CustomArrayList<E> implements List<E> {
 
     @Override
     public boolean remove(Object o) {
-        for (int i = 0; i < size; i++) {
-            if (data[i].equals(o)) {
-                remove(i);
-                return true;
-            }
+        int index = indexOf(o);
+        if (index >= 0) {
+            remove(index);
+            return true;
         }
         return false;
     }
+
 
     private void ensureCapacity(int capacity) {
         if (this.data.length < capacity) {
@@ -91,17 +91,14 @@ public class CustomArrayList<E> implements List<E> {
 
     @Override
     public E set(int index, E element) {
-        return null;
+        E oldElement = get(index);
+        data[index] = element;
+        return oldElement;
     }
 
     @Override
     public boolean contains(Object o) {
-        for (int i = 0; i < size; i++) {
-            if (data[i].equals(o)) {
-                return true;
-            }
-        }
-        return false;
+        return indexOf(o) >= 0;
     }
 
     @Override
@@ -134,7 +131,20 @@ public class CustomArrayList<E> implements List<E> {
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        if (o == null) {
+            for (int i = 0; i < size; i++) {
+                if (data[i] == null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (o.equals(data[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
     @Override

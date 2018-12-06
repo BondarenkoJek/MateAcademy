@@ -29,7 +29,10 @@ public class CustomArrayList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
-        rangeCheckForAdd(index);
+        if (index != size) {
+            rangeCheck(index);
+        }
+
         ensureCapacity(size + 1);
 
         Object[] tmpData = new Object[size - index];
@@ -123,11 +126,6 @@ public class CustomArrayList<E> implements List<E> {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
         }
-    }
-
-    private void rangeCheckForAdd(int index) {
-        if (index > size || index < 0)
-            throw new IndexOutOfBoundsException(outOfBoundsMsg(index));
     }
 
     private String outOfBoundsMsg(int index) {

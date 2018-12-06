@@ -23,7 +23,8 @@ public class Main {
         }
         long finish = System.currentTimeMillis();
 
-        System.out.println(list.getClass().getSimpleName() + " add to head test time - " + (finish - start));
+        System.out.println(list.getClass().getSimpleName() +
+                " add to head test time - " + (finish - start));
     }
 
     private static void testAddToTail(List<Integer> list) {
@@ -33,6 +34,7 @@ public class Main {
         }
         long finish = System.currentTimeMillis();
 
-        System.out.println(list.getClass().getSimpleName() + " add to tail test time - " + (finish - start));
+        System.out.println(list.getClass().getSimpleName() +
+                " add to tail test time - " + (finish - start));
     }
 }

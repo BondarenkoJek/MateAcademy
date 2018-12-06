@@ -109,10 +109,12 @@ public class CustomArrayList<E> implements List<E> {
         size = 0;
     }
 
+    @Override
     public int size() {
         return size;
     }
 
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }

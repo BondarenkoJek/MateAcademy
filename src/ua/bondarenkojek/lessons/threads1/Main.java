@@ -1,4 +1,4 @@
-package ua.bondarenkojek.lessons.threads;
+package ua.bondarenkojek.lessons.threads1;
 
 
 public class Main {

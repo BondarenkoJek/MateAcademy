@@ -1,10 +1,7 @@
 package ua.bondarenkojek.homework.singleton;
 
-/**
- * Created by jek on 12/8/18.
- */
 public class Singleton {
-    private static Singleton instance;
+    private static volatile Singleton instance;
 
     private Singleton() {
     }
@@ -12,7 +9,9 @@ public class Singleton {
     public static Singleton newInstanse() {
         if (instance == null) {
             synchronized (Singleton.class) {
-                instance = new Singleton();
+                if (instance == null) {
+                    instance = new Singleton();
+                }
             }
         }
         return instance;

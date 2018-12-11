@@ -1,5 +1,7 @@
 package ua.bondarenkojek.homework.collections.list;
 
+import ua.bondarenkojek.homework.collections.list.customArrayList.CustomArrayList;
+
 import java.util.List;
 
 public class TestCustomArrayList {

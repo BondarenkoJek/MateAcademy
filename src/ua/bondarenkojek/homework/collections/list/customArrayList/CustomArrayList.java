@@ -1,4 +1,4 @@
-package ua.bondarenkojek.homework.collections.list;
+package ua.bondarenkojek.homework.collections.list.customArrayList;
 
 import java.util.Collection;
 import java.util.Iterator;

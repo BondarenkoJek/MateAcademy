@@ -8,6 +8,7 @@ public class Main {
         user.setAge(26);
         user.setName("Jek");
 
-        JsonUtility.printUserToFile(user, path);
+        JsonUtility.writeUserToFile(user, path);
+        JsonUtility.readUserFromFile(path);
     }
 }

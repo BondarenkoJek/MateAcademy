@@ -1,6 +1,7 @@
 package ua.bondarenkojek.homework.json;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,6 @@ public class Main {
         String supply2 = "src/main/java/ua/bondarenkojek/homework/json/supply2.json";
 
         TradingShop tradingShop = new TradingShop();
-
         tradingShop.addFruits(fruits, supply1);
 
         Fruit pear = new Fruit();
@@ -39,9 +39,18 @@ public class Main {
         fruits.add(pear);
 
         tradingShop.addFruits(fruits, supply2);
-
         tradingShop.save(fruitsDB);
-
         tradingShop.load(fruitsDB);
+
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, 16);
+        date = calendar.getTime();
+
+        tradingShop.getSpoiledFruits(date).forEach(System.out::println);
+        System.out.println();
+        tradingShop.getAvailableFruits(date).forEach(System.out::println);
+        tradingShop.getAddedFruits(date).forEach(System.out::println);
     }
 }

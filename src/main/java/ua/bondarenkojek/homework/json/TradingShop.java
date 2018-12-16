@@ -1,8 +1,6 @@
 package ua.bondarenkojek.homework.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.DataInput;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,10 +12,6 @@ public class TradingShop {
 
     public TradingShop() {
         fruitsDB = new ArrayList<>();
-    }
-
-    public TradingShop(List<Fruit> fruitsDB) {
-        this.fruitsDB = fruitsDB;
     }
 
     public void addFruits(List<Fruit> fruits, String pathToJsonFile) {

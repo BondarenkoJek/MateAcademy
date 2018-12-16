@@ -31,12 +31,12 @@ public class Main {
         TradingShop tradingShop = new TradingShop();
         tradingShop.addFruits(fruits, supply1);
 
-        fruits.clear();
         Fruit pear = new Fruit();
         pear.setType(Fruit.FruitType.PEAR);
         pear.setShelfLife(15);
         pear.setPrice(1.50);
         pear.setDate(new Date());
+        fruits.clear();
         fruits.add(pear);
 
         tradingShop.addFruits(fruits, supply2);

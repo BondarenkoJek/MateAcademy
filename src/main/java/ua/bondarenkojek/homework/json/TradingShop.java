@@ -36,9 +36,8 @@ public class TradingShop {
     public void save(String pathToJsonFile) {
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
-
         try {
-            mapper.writeValue(file, fruitsDB);
+            mapper.writeValue(file, this);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +48,9 @@ public class TradingShop {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            fruitsDB = Arrays.asList(mapper.readValue(file, Fruit[].class));
+            TradingShop shop = mapper.readValue(file, TradingShop.class);
+            fruitsDB = shop.getFruitsDB();
+            moneyBalance = shop.getMoneyBalance();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,19 +101,19 @@ public class TradingShop {
             e.printStackTrace();
         }
 
-        if (clients==null || fruitsDB.isEmpty())
+        if (clients == null || fruitsDB.isEmpty())
             return;
 
         for (Client client : clients) {
-            int countOfFruit = 0;
+            int count = client.getCount();
+
             for (Fruit fruit : fruitsDB) {
-                if (countOfFruit == client.getCount())
-                    break;
-                if (client.getType() == fruit.getType())
-                    countOfFruit++;
+                if (client.getFruitType() == fruit.getType() && count > 0)
+                    count--;
+                else break;
             }
-            if (client.getCount() == countOfFruit)
-                pay(client.getType(), client.getCount());
+            if (count == 0)
+                pay(client.getFruitType(), client.getCount());
         }
     }
 
@@ -132,5 +133,9 @@ public class TradingShop {
 
     public double getMoneyBalance() {
         return moneyBalance;
+    }
+
+    public List<Fruit> getFruitsDB() {
+        return fruitsDB;
     }
 }

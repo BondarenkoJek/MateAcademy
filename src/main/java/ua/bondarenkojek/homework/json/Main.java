@@ -1,12 +1,17 @@
 package ua.bondarenkojek.homework.json;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        String fruitsDB = "src/main/java/ua/bondarenkojek/homework/json/shopDB.json";
+        String supply1 = "src/main/java/ua/bondarenkojek/homework/json/supply1.json";
+        String supply2 = "src/main/java/ua/bondarenkojek/homework/json/supply2.json";
+
         List<Fruit> fruits = new ArrayList<>();
         Fruit apple = new Fruit();
         apple.setType(Fruit.FruitType.APPLE);
@@ -23,34 +28,28 @@ public class Main {
         fruits.add(apple);
         fruits.add(banana);
 
-        String fruitsDB = "src/main/java/ua/bondarenkojek/homework/json/fruitsDB.json";
-        String supply1 = "src/main/java/ua/bondarenkojek/homework/json/supply1.json";
-        String supply2 = "src/main/java/ua/bondarenkojek/homework/json/supply2.json";
-
         TradingShop tradingShop = new TradingShop();
         tradingShop.addFruits(fruits, supply1);
 
+        fruits.clear();
         Fruit pear = new Fruit();
         pear.setType(Fruit.FruitType.PEAR);
         pear.setShelfLife(15);
         pear.setPrice(1.50);
         pear.setDate(new Date());
-
         fruits.add(pear);
 
         tradingShop.addFruits(fruits, supply2);
         tradingShop.save(fruitsDB);
         tradingShop.load(fruitsDB);
 
-        Date date = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.DATE, 16);
-        date = calendar.getTime();
+        LocalDate localDate = LocalDate.of(2019, 1, 1);
+        Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
         tradingShop.getSpoiledFruits(date).forEach(System.out::println);
         System.out.println();
         tradingShop.getAvailableFruits(date).forEach(System.out::println);
-        tradingShop.getAddedFruits(date).forEach(System.out::println);
+        System.out.println();
+        tradingShop.getAddedFruits(new Date()).forEach(System.out::println);
     }
 }

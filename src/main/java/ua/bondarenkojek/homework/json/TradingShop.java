@@ -1,6 +1,7 @@
 package ua.bondarenkojek.homework.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,6 +26,7 @@ public class TradingShop {
 
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
             mapper.writeValue(file, fruits);
@@ -36,6 +38,8 @@ public class TradingShop {
     public void save(String pathToJsonFile) {
         File file = new File(pathToJsonFile);
         ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
         try {
             mapper.writeValue(file, this);
         } catch (IOException e) {

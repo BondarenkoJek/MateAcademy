@@ -1,1 +1,6 @@
-[{"type":"PEAR","shelfLife":15,"date":"16/12/2018","price":1.5}]
+[ {
+  "type" : "PEAR",
+  "shelfLife" : 15,
+  "date" : "16/12/2018",
+  "price" : 1.5
+} ]

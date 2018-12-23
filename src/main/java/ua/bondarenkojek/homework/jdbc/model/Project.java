@@ -10,5 +10,6 @@ import java.util.Set;
 public class Project {
     private long id;
     private String name;
+    private int numberOfDevelopers;
     private Set<Developer> developers;
 }

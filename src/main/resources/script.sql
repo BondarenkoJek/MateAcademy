@@ -27,14 +27,9 @@ CREATE TABLE customers(
 CREATE TABLE skills(
   skill_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   type ENUM ('JAVA', 'CPP', 'C_SHARP','JS') NOT NULL ,
-  level ENUM ('JUNIOR', 'MIDDLE', 'SENIOR') NOT NULL
-);
-
-CREATE TABLE developersSkillsRelation(
+  level ENUM ('JUNIOR', 'MIDDLE', 'SENIOR') NOT NULL ,
   developer_id INT NOT NULL ,
-  skill_id INT NOT NULL ,
-  FOREIGN KEY (developer_id) REFERENCES developers (developer_id),
-  FOREIGN KEY (skill_id) REFERENCES skills (skill_id)
+  FOREIGN KEY (developer_id) REFERENCES developers(developer_id)
 );
 
 CREATE TABLE developersProjectsRelation(
@@ -57,3 +52,34 @@ CREATE TABLE customersProjectsRelation(
   FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
   FOREIGN KEY (project_id) REFERENCES projects (project_id)
 );
+
+# 1
+ALTER TABLE developers
+  ADD salary DOUBLE;
+
+# 3
+SELECT sum(salary)
+FROM developers
+  INNER JOIN skills
+    ON developers.developer_id = skills.developer_id
+WHERE skills.type = "JAVA";
+
+# 4
+ALTER TABLE projects
+  ADD cost DOUBLE;
+
+# 5
+SELECT projects.name
+FROM projects
+WHERE cost = (
+  SELECT min(cost)
+  FROM projects);
+
+# 6
+SELECT avg(developers.salary) AS avgSalary
+FROM projects
+  INNER JOIN developersProjectsRelation
+    ON projects.project_id = developersProjectsRelation.project_id
+  INNER JOIN developers
+    ON developersProjectsRelation.developer_id = developers.developer_id
+WHERE projects.cost = ( SELECT min(cost)FROM projects);

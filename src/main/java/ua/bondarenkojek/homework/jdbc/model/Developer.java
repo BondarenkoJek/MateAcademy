@@ -11,6 +11,7 @@ public class Developer {
     private long id;
     private String name;
     private int age;
+    private double salary;
     private int numberOfSkills;
     private int numberOfProjects;
     private Set<Project> projects;

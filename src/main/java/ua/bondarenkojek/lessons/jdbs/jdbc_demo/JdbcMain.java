@@ -9,6 +9,8 @@ public class JdbcMain {
         UserService userService = new UserServiceImpl(
                 new UserDaoImpl(ConnectionUtil.getConnection()));
 
-        System.out.println(userService.findByLogin("loginJek"));
+//        System.out.println(userService.findByLogin("loginJek"));
+
+        userService.getAllNamesUpperCase().forEach(System.out::println);
     }
 }

@@ -1,12 +1,13 @@
 package ua.bondarenkojek.lessons.jdbs.jdbc_demo.dao;
 
-import ua.bondarenkojek.lessons.jdbs.jdbc_demo.ConnectionUtil;
 import ua.bondarenkojek.lessons.jdbs.jdbc_demo.model.User;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
@@ -28,12 +29,27 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         return null;
     }
 
+    @Override
+    public List<User> findAll() {
+        final String sql = "SELECT * FROM users";
+        List<User> list = new ArrayList<>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            while (rs.next()) {
+                list.add(getUser(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
     private User getUser(ResultSet rs) throws SQLException {
-        return User.builder()
-                .id(rs.getLong("user_id"))
-                .name(rs.getString("name"))
-                .login(rs.getString("login"))
-                .password(rs.getString("password"))
-                .sex(rs.getString("sex")).build();
+        User user = new User();
+
+        return user;
+
     }
 }

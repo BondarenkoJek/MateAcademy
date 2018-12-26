@@ -1,27 +1,27 @@
 CREATE TABLE developers(
   developer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(45) NOT NULL ,
-  age INT NOT NULL ,
-  number_of_skills INT NOT NULL ,
-  number_of_projects INT
+  age INT NOT NULL
 );
 
 CREATE TABLE companies(
   company_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  name VARCHAR(100) NOT NULL ,
-  number_of_projects INT
+  name VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE customers(
+  customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
+  name VARCHAR(45) NOT NULL
 );
 
 CREATE TABLE projects(
   project_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
   name VARCHAR(100) NOT NULL ,
-  number_of_developers INT
-);
-
-CREATE TABLE customers(
-  customer_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY ,
-  name VARCHAR(45) NOT NULL ,
-  number_of_projects INT
+  date DATE NOT NULL ,
+  company_id INT NOT NULL ,
+  customer_id INT NOT NULL ,
+  FOREIGN KEY (company_id) REFERENCES companies(company_id) ,
+  FOREIGN KEY (customer_id) REFERENCES customers (customer_id)
 );
 
 CREATE TABLE skills(
@@ -39,23 +39,23 @@ CREATE TABLE developersProjectsRelation(
   FOREIGN KEY (project_id) REFERENCES projects (project_id)
 );
 
-CREATE TABLE companiesProjectsRelation(
-  company_id INT NOT NULL ,
-  project_id INT NOT NULL ,
-  FOREIGN KEY (company_id) REFERENCES companies (company_id),
-  FOREIGN KEY (project_id) REFERENCES projects (project_id)
-);
-
-CREATE TABLE customersProjectsRelation(
-  customer_id INT NOT NULL ,
-  project_id INT NOT NULL ,
-  FOREIGN KEY (customer_id) REFERENCES customers (customer_id),
-  FOREIGN KEY (project_id) REFERENCES projects (project_id)
-);
 
 # 1
 ALTER TABLE developers
   ADD salary DOUBLE;
+
+# 2
+SELECT
+  projects.name AS name,
+  sum(developers.salary) AS sumSalary
+FROM projects
+  INNER JOIN developersProjectsRelation
+    ON projects.project_id = developersProjectsRelation.project_id
+  INNER JOIN developers
+    ON developersProjectsRelation.developer_id = developers.developer_id
+GROUP BY projects.project_id
+ORDER BY sumSalary DESC
+LIMIT 1;
 
 # 3
 SELECT sum(salary)
@@ -69,11 +69,10 @@ ALTER TABLE projects
   ADD cost DOUBLE;
 
 # 5
-SELECT projects.name
+SELECT name,  cost
 FROM projects
-WHERE cost = (
-  SELECT min(cost)
-  FROM projects);
+ORDER BY cost
+LIMIT 1;
 
 # 6
 SELECT avg(developers.salary) AS avgSalary

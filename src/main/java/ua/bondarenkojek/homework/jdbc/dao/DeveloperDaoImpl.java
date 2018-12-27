@@ -4,6 +4,7 @@ import ua.bondarenkojek.homework.jdbc.model.Developer;
 import ua.bondarenkojek.homework.jdbc.model.Skill;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,25 +19,55 @@ public class DeveloperDaoImpl extends AbstractDao implements DeveloperDao {
 
     @Override
     public void addDeveloper(Developer developer) {
+        final String INSERT_DEVELOPER =
+                "INSERT INTO developers(name, age, salary) VALUES(?, ?, ?)";
+        final String SELECT_LAST_INDEX =
+                "SELECT MAX(developer_id) AS id FROM developers";
+        final String INSERT_SKILLS_FOR_DEVELOPER =
+                "INSERT INTO skills(type, level, developer_id VALUES(?, ?, ?)";
 
+        try {
+            PreparedStatement statement = connection.prepareStatement(INSERT_DEVELOPER);
+            statement.setString(1, developer.getName());
+            statement.setInt(2, developer.getAge());
+            statement.setDouble(3, developer.getSalary());
+            statement.execute();
+
+            statement = connection.prepareStatement(SELECT_LAST_INDEX);
+            statement.executeQuery();
+            ResultSet set = statement.getResultSet();
+            long lastDevIndex = set.getLong("id");
+
+            statement = connection.prepareStatement(INSERT_SKILLS_FOR_DEVELOPER);
+
+            for (Skill skill : developer.getSkills()) {
+                statement.setString(1, skill.getTypeOfSkill().name());
+                statement.setString(2, skill.getSkillLevel().name());
+                statement.setLong(3, lastDevIndex);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public Developer getDeveloperById(long id) {
-        final String sqlDev = "SELECT * FROM DEVELOPERS WHERE developer_id=\"" + id + "\"";
-        final String sqlSkills = "SELECT * FROM skills WHERE developer_id=\"" + id + "\"";
+        final String SELECT_DEVELOPER_BY_ID = "SELECT * FROM DEVELOPERS WHERE developer_id=\"" + id + "\"";
+        final String SELECT_SKILL_BY_DEV_ID = "SELECT * FROM skills WHERE developer_id=\"" + id + "\"";
         Developer developer = null;
 
         try {
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery(sqlDev);
+            ResultSet rs = statement.executeQuery(SELECT_DEVELOPER_BY_ID);
 
             if (!rs.next())
                 return developer;
 
             developer =  getDeveloper(rs);
 
-            rs = statement.executeQuery(sqlSkills);
+            rs = statement.executeQuery(SELECT_SKILL_BY_DEV_ID);
 
             while (rs.next()) {
                 developer.addSkill(getSkill(rs));

@@ -4,27 +4,39 @@ public class BuilderPattern implements Pattern {
     private String name;
     private String someField;
 
+    public BuilderPattern(String name, String someField) {
+        this.name = name;
+        this.someField = someField;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
     @Override
     public String getPatterName() {
         return "BuilderPattern";
     }
 
-    public class Builder {
+    public static class Builder {
+        private String name;
+        private String someField;
+
         private Builder() {
         }
 
-        public BuilderPattern getName(String name) {
-            BuilderPattern.this.name = name;
-            return BuilderPattern.this;
+        public Builder getName(String name) {
+            this.name = name;
+            return this;
         }
 
-        public BuilderPattern getSomeField(String someField) {
-            BuilderPattern.this.someField = someField;
-            return BuilderPattern.this;
+        public Builder getSomeField(String someField) {
+            this.someField = someField;
+            return this;
         }
 
         public BuilderPattern build() {
-            return BuilderPattern.this;
+            return new BuilderPattern(name, someField);
         }
     }
 

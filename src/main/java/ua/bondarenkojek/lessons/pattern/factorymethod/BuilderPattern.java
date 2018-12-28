@@ -4,6 +4,9 @@ public class BuilderPattern implements Pattern {
     private String name;
     private String someField;
 
+    private BuilderPattern() {
+    }
+
     public BuilderPattern(String name, String someField) {
         this.name = name;
         this.someField = someField;
@@ -15,7 +18,7 @@ public class BuilderPattern implements Pattern {
 
     @Override
     public String getPatterName() {
-        return "BuilderPattern";
+        return "Builder";
     }
 
     public static class Builder {
@@ -39,6 +42,4 @@ public class BuilderPattern implements Pattern {
             return new BuilderPattern(name, someField);
         }
     }
-
-
 }

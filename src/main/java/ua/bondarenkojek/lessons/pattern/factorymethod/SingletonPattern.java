@@ -16,6 +16,6 @@ public final class SingletonPattern implements Pattern {
 
     @Override
     public String getPatterName() {
-        return "SingletonPattern";
+        return "Singleton";
     }
 }

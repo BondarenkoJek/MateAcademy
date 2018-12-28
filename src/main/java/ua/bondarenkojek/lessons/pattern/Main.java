@@ -8,7 +8,6 @@ import ua.bondarenkojek.lessons.pattern.factorymethod.SingletonPatternExample;
 
 public class Main {
     public static void main(String[] args) {
-
         PatternExample builderPatternExample = new BuilderPatternExample();
         PatternExample singletonPatternExample = new SingletonPatternExample();
         PatternExample proxyPatternExample = new ProxyPatternExapmle();
@@ -20,6 +19,5 @@ public class Main {
         System.out.println("I'm " + builder.getPatterName());
         System.out.println("I'm " + singleton.getPatterName());
         System.out.println("I'm " + proxy.getPatterName());
-
     }
 }

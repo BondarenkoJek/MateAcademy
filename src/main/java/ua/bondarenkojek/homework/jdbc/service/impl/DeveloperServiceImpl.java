@@ -1,8 +1,10 @@
-package ua.bondarenkojek.homework.jdbc.service;
+package ua.bondarenkojek.homework.jdbc.service.impl;
 
 import ua.bondarenkojek.homework.jdbc.dao.DeveloperDao;
 import ua.bondarenkojek.homework.jdbc.model.Developer;
+import ua.bondarenkojek.homework.jdbc.model.Project;
 import ua.bondarenkojek.homework.jdbc.model.Skill;
+import ua.bondarenkojek.homework.jdbc.service.DeveloperService;
 
 import java.util.Set;
 
@@ -46,6 +48,11 @@ public class DeveloperServiceImpl implements DeveloperService {
     @Override
     public Set<Developer> findAllByLevelOfSkill(String skillLevel) {
         return developerDao.findAllByLevelOfSkill(Skill.SkillLevel.valueOf(skillLevel.toUpperCase()));
+    }
+
+    @Override
+    public Set<Developer> findAllDevelopersByProject(Project project) {
+        return developerDao.findAllDevelopersByProject(project);
     }
 
     @Override

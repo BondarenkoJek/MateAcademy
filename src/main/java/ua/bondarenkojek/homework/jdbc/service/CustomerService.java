@@ -1,8 +1,8 @@
-package ua.bondarenkojek.homework.jdbc.dao;
+package ua.bondarenkojek.homework.jdbc.service;
 
 import ua.bondarenkojek.homework.jdbc.model.Customer;
 
-public interface CustomerDao {
+public interface CustomerService {
     void addCustomer(Customer customer);
 
     Customer getCustomer(long id);

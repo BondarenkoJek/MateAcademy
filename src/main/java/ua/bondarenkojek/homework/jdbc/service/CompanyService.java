@@ -1,8 +1,8 @@
-package ua.bondarenkojek.homework.jdbc.dao;
+package ua.bondarenkojek.homework.jdbc.service;
 
 import ua.bondarenkojek.homework.jdbc.model.Company;
 
-public interface CompanyDao {
+public interface CompanyService {
     void addCompany(Company company);
 
     Company getCompany(long id);

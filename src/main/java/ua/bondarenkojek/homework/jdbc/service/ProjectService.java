@@ -1,11 +1,11 @@
-package ua.bondarenkojek.homework.jdbc.dao;
+package ua.bondarenkojek.homework.jdbc.service;
 
 import ua.bondarenkojek.homework.jdbc.model.Developer;
 import ua.bondarenkojek.homework.jdbc.model.Project;
 
 import java.util.Set;
 
-public interface ProjectDao {
+public interface ProjectService {
     void addProject(Project project);
 
     void addDeveloperForProject(Project project, Developer developer);

@@ -1,5 +1,7 @@
-package ua.bondarenkojek.homework.jdbc.dao;
+package ua.bondarenkojek.homework.jdbc.dao.impl;
 
+import ua.bondarenkojek.homework.jdbc.dao.AbstractDao;
+import ua.bondarenkojek.homework.jdbc.dao.ProjectDao;
 import ua.bondarenkojek.homework.jdbc.model.Company;
 import ua.bondarenkojek.homework.jdbc.model.Customer;
 import ua.bondarenkojek.homework.jdbc.model.Developer;

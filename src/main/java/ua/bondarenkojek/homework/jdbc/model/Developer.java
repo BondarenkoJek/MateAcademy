@@ -21,7 +21,6 @@ public class Developer {
     }
 
     public void addProject(Project project) {
-        project.addDeveloper(this);
         projects.add(project);
     }
 }

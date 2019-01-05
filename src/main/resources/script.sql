@@ -32,7 +32,7 @@ CREATE TABLE skills(
   FOREIGN KEY (developer_id) REFERENCES developers(developer_id)
 );
 
-CREATE TABLE developersProjectsRelation(
+CREATE TABLE developers_projects(
   developer_id INT NOT NULL ,
   project_id INT NOT NULL ,
   FOREIGN KEY (developer_id) REFERENCES developers (developer_id),
@@ -49,10 +49,10 @@ SELECT
   projects.name AS name,
   sum(developers.salary) AS sumSalary
 FROM projects
-  INNER JOIN developersProjectsRelation
-    ON projects.project_id = developersProjectsRelation.project_id
+  INNER JOIN developers_projects
+    ON projects.project_id = developers_projects.project_id
   INNER JOIN developers
-    ON developersProjectsRelation.developer_id = developers.developer_id
+    ON developers_projects.developer_id = developers.developer_id
 GROUP BY projects.project_id
 ORDER BY sumSalary DESC
 LIMIT 1;
@@ -77,8 +77,8 @@ LIMIT 1;
 # 6
 SELECT avg(developers.salary) AS avgSalary
 FROM projects
-  INNER JOIN developersProjectsRelation
-    ON projects.project_id = developersProjectsRelation.project_id
+  INNER JOIN developers_projects
+    ON projects.project_id = developers_projects.project_id
   INNER JOIN developers
-    ON developersProjectsRelation.developer_id = developers.developer_id
+    ON developers_projects.developer_id = developers.developer_id
 WHERE projects.cost = ( SELECT min(cost)FROM projects);

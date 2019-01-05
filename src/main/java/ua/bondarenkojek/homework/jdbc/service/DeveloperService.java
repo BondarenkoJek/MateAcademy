@@ -10,7 +10,7 @@ public interface DeveloperService {
 
     Developer getDeveloperById(long id);
 
-    void setDeveloper(Developer developer);
+    void updateDeveloper(Developer developer);
 
     void removeDeveloperById(long id);
 

@@ -24,8 +24,8 @@ public class DeveloperServiceImpl implements DeveloperService {
     }
 
     @Override
-    public void setDeveloper(Developer developer) {
-        developerDao.setDeveloper(developer);
+    public void updateDeveloper(Developer developer) {
+        developerDao.updateDeveloper(developer);
     }
 
     @Override

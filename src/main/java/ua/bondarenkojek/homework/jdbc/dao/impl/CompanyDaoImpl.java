@@ -41,9 +41,8 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDao {
             PreparedStatement statement = connection.prepareStatement(SELECT_COMPANY_BY_ID);
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+
                 return getCompany(rs);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -90,21 +89,24 @@ public class CompanyDaoImpl extends AbstractDao implements CompanyDao {
     }
 
     private Company getCompany(ResultSet rs) throws SQLException {
-        Company company = Company.builder()
-                .id(rs.getLong("companies.company_id"))
-                .name(rs.getString("companies.name"))
-                .projects(new HashSet<>())
-                .build();
-        while (rs.next()) {
-            company.addProject(Project
-                    .builder()
-                    .id(rs.getLong("project_id"))
-                    .name("projects.name")
-                    .createDate(rs.getDate("date").toLocalDate())
-                    .customer(Customer.builder().id(rs.getLong("customer_id")).build())
-                    .cost(rs.getDouble("cost"))
-                    .build());
+        if (rs.next()) {
+            Company company = Company.builder()
+                    .id(rs.getLong("companies.company_id"))
+                    .name(rs.getString("companies.name"))
+                    .projects(new HashSet<>())
+                    .build();
+            while (rs.next()) {
+                company.addProject(Project
+                        .builder()
+                        .id(rs.getLong("project_id"))
+                        .name("projects.name")
+                        .createDate(rs.getDate("date").toLocalDate())
+                        .customer(Customer.builder().id(rs.getLong("customer_id")).build())
+                        .cost(rs.getDouble("cost"))
+                        .build());
+            }
+            return company;
         }
-        return company;
+        return null;
     }
 }

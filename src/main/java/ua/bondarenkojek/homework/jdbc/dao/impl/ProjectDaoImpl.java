@@ -65,18 +65,30 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
     @Override
     public Project getProjectById(long id) {
         final String SELECT_PROJECT_BY_ID =
-                "SELECT *\n" +
-                        "FROM projects\n" +
-                        "INNER JOIN developers_projects AS dp\n" +
-                        "ON projects.project_id = dp.project_id\n" +
-                        "INNER JOIN developers\n" +
-                        "ON dp.developer_id = developers.developer_id\n" +
-                        "WHERE projects.project_id = ?;";
+                "SELECT * " +
+                        "FROM projects " +
+                        "WHERE projects.project_id = ?";
+        final String SELECT_DEVELOPERS_BY_PROJECT_ID =
+                "SELECT * " +
+                        "FROM developers " +
+                        "INNER JOIN developers_projects AS dp " +
+                        "ON dp.developer_id = developers.developer_id " +
+                        "WHERE dp.project_id = ?";
         Project project = null;
         try {
             PreparedStatement statement = connection.prepareStatement(SELECT_PROJECT_BY_ID);
             statement.setLong(1, id);
-            project = getProject(statement.executeQuery());
+            ResultSet rs = statement.executeQuery();
+            if(rs.next()) {
+                project = getProject(rs);
+
+                statement = connection.prepareStatement(SELECT_DEVELOPERS_BY_PROJECT_ID);
+                statement.setLong(1, id);
+                rs = statement.executeQuery();
+                while (rs.next()) {
+                    project.addDeveloper(getDeveloper(rs));
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -139,7 +151,7 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
     public Double getAllSalaryByProject(Project project) {
         Double sumSalary = null;
         final String SELECT_SUM_DEV_SALARY_BY_PROJECT =
-                "SELECT SUM(salary) AS salaries" +
+                "SELECT SUM(salary) AS salaries " +
                         "FROM developers " +
                         "INNER JOIN developers_projects AS dp " +
                         "ON dp.developer_id = developers.developer_id " +
@@ -148,7 +160,9 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
             PreparedStatement statement = connection.prepareStatement(SELECT_SUM_DEV_SALARY_BY_PROJECT);
             statement.setLong(1, project.getId());
             ResultSet rs = statement.executeQuery();
-            sumSalary = rs.getDouble("salaries");
+            if(rs.next()) {
+                sumSalary = rs.getDouble("salaries");
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -178,10 +192,7 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
     }
 
     private Project getProject(ResultSet rs) throws SQLException {
-        Project project = null;
-//Adding data to project without developers
-        if (rs.next()) {
-            project = Project.builder()
+            return Project.builder()
                     .id(rs.getLong("projects.project_id"))
                     .name(rs.getString("projects.name"))
                     .createDate(rs.getDate("date").toLocalDate())
@@ -196,26 +207,23 @@ public class ProjectDaoImpl extends AbstractDao implements ProjectDao {
                     .cost(rs.getDouble("cost"))
                     .developers(new HashSet<>())
                     .build();
+    }
 
-//Adding data developers to project
-            do {
-                project.addDeveloper(Developer
-                        .builder()
-                        .id(rs.getLong("developers.developer_id"))
-                        .name(rs.getString("developers.name"))
-                        .age(rs.getInt("age"))
-                        .salary(rs.getDouble("salary"))
-                        .build());
-            } while (rs.next());
-        }
-        return project;
+    private Developer getDeveloper(ResultSet rs) throws SQLException {
+        return Developer
+                .builder()
+                .id(rs.getLong("developer_id"))
+                .name(rs.getString("name"))
+                .age(rs.getInt("age"))
+                .salary(rs.getDouble("salary"))
+                .build();
     }
 
     private void doRelationProjectWithDeveloper(String query, long projectId, long developerId) {
         try {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, projectId);
-            statement.setLong(2, developerId);
+            statement.setLong(1, developerId);
+            statement.setLong(2, projectId);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();

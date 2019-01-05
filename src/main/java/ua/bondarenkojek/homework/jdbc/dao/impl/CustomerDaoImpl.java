@@ -37,9 +37,8 @@ public class CustomerDaoImpl extends AbstractDao implements CustomerDao {
             PreparedStatement statement = connection.prepareStatement(SELECT_CUSTOMER_BY_ID);
             statement.setLong(1, id);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+
                 return getCustomer(rs);
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -86,21 +85,24 @@ public class CustomerDaoImpl extends AbstractDao implements CustomerDao {
     }
 
     private Customer getCustomer(ResultSet rs) throws SQLException {
-        Customer customer = Customer.builder()
-                .id(rs.getLong("customers.customer_id"))
-                .name(rs.getString("customers.name"))
-                .projects(new HashSet<>())
-                .build();
-        while (rs.next()) {
-            customer.addProject(Project
-                    .builder()
-                    .id(rs.getLong("project_id"))
-                    .name("projects.name")
-                    .createDate(rs.getDate("date").toLocalDate())
-                    .customer(Customer.builder().id(rs.getLong("company_id")).build())
-                    .cost(rs.getDouble("cost"))
-                    .build());
+        if (rs.next()) {
+            Customer customer = Customer.builder()
+                    .id(rs.getLong("customers.customer_id"))
+                    .name(rs.getString("customers.name"))
+                    .projects(new HashSet<>())
+                    .build();
+            while (rs.next()) {
+                customer.addProject(Project
+                        .builder()
+                        .id(rs.getLong("project_id"))
+                        .name("projects.name")
+                        .createDate(rs.getDate("date").toLocalDate())
+                        .customer(Customer.builder().id(rs.getLong("company_id")).build())
+                        .cost(rs.getDouble("cost"))
+                        .build());
+            }
+            return customer;
         }
-        return customer;
+        return null;
     }
 }

@@ -78,14 +78,14 @@ public class Main {
 //        developer = developerService.getDeveloperById(10);
 //        projectService.addDeveloperForProject(project, developer);
 
-        Project project = projectService.getProjectById(3);
-        System.out.println(projectService.getAllSalaryByProject(project));
-        developerService.findAllDevelopersByProject(project).forEach(System.out::println);
-        developerService.findAllByTypeOfSkill("Java").forEach(System.out::println);
-        developerService.findAllByLevelOfSkill("middle").forEach(System.out::println);
-        projectService.findAll().forEach(p ->
-                System.out.println("date: " + p.getCreateDate()
-                        + " name: " + p.getName()
-                        + " developers amount: " + p.getDevelopers().size()));
+//        Project project = projectService.getProjectById(3);
+//        System.out.println(projectService.getAllSalaryByProject(project));
+//        developerService.findAllDevelopersByProject(project).forEach(System.out::println);
+//        developerService.findAllByTypeOfSkill("Java").forEach(System.out::println);
+//        developerService.findAllByLevelOfSkill("middle").forEach(System.out::println);
+//        projectService.findAll().forEach(p ->
+//                System.out.println("date: " + p.getCreateDate()
+//                        + " name: " + p.getName()
+//                        + " developers amount: " + p.getDevelopers().size()));
     }
 }

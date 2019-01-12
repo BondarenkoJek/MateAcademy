@@ -31,4 +31,25 @@ public abstract class Test {
     @ManyToOne(optional = false)
     @JoinColumn(name = "patient_id")
     private Patient owner;
+
+    public Test doTest(Patient patient) {
+        setOwner(patient);
+        patient.addTest(this);
+        return this;
+    }
+
+    public abstract Double getResult();
+
+    public static Test getTest(TestType testType) {
+        switch (testType) {
+            case SKIN: return new SkinTest();
+            case BLOOD: return new BloodTest();
+        }
+        return null;
+    }
+
+    public static enum TestType {
+        BLOOD,
+        SKIN
+    }
 }

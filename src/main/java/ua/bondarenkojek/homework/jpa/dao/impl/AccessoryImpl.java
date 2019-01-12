@@ -1,44 +1,43 @@
 package ua.bondarenkojek.homework.jpa.dao.impl;
 
 import ua.bondarenkojek.homework.jpa.dao.AbstractDao;
-import ua.bondarenkojek.homework.jpa.dao.PatientDao;
-import ua.bondarenkojek.homework.jpa.model.Patient;
+import ua.bondarenkojek.homework.jpa.dao.Accessory;
 
 import javax.persistence.EntityManager;
 
-public class PatientDaoImpl extends AbstractDao implements PatientDao {
-    public PatientDaoImpl(EntityManager entityManager) {
+public class AccessoryImpl extends AbstractDao implements Accessory {
+    public AccessoryImpl(EntityManager entityManager) {
         super(entityManager);
     }
 
     @Override
-    public Long createEntity(Patient entity) {
+    public Long createEntity(Accessory entity) {
         entityManager.getTransaction().begin();
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
         return (Long) entityManager
-                .createQuery("select p.id from patient p order by p.id desc")
+                .createQuery("select a.id from accessory a order by a.id desc")
                 .setMaxResults(1)
                 .getSingleResult();
     }
 
     @Override
-    public Patient readEntity(Long id) {
+    public Accessory readEntity(Long id) {
         entityManager.getTransaction().begin();
-        Patient patient = entityManager.find(Patient.class, id);
+        Accessory accessory = entityManager.find(Accessory.class, id);
         entityManager.getTransaction().commit();
-        return patient;
+        return accessory;
     }
 
     @Override
-    public void updateEntity(Patient entity) {
+    public void updateEntity(Accessory entity) {
         entityManager.getTransaction().begin();
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
     }
 
     @Override
-    public void deleteEntity(Patient entity) {
+    public void deleteEntity(Accessory entity) {
         entityManager.getTransaction().begin();
         entityManager.remove(entity);
         entityManager.getTransaction().commit();

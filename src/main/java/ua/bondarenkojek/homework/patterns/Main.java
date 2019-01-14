@@ -1,5 +1,8 @@
 package ua.bondarenkojek.homework.patterns;
 
+import ua.bondarenkojek.homework.patterns.abstracrFactory.AbstractFactory;
+import ua.bondarenkojek.homework.patterns.abstracrFactory.Factory;
+import ua.bondarenkojek.homework.patterns.abstracrFactory.cars.Car;
 import ua.bondarenkojek.homework.patterns.adapter.Data;
 import ua.bondarenkojek.homework.patterns.adapter.DataBase;
 import ua.bondarenkojek.homework.patterns.adapter.DataImpl;
@@ -30,5 +33,9 @@ public class Main {
         dataBase.update(textData);
         dataBase.delete(data);
         dataBase.delete(textData);
+
+//test abstract factory
+        Factory<Car> carFactory = AbstractFactory.gerCarFactory();
+        Car audi = carFactory.getObject("Audi");
     }
 }

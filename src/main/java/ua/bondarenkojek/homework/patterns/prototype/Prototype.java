@@ -9,8 +9,6 @@ public class Prototype implements Copyable<Prototype> {
         this.name = name;
     }
 
-
-
     @Override
     public String toString() {
         return "Prototype{" +

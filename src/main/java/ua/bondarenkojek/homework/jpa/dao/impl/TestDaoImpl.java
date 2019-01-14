@@ -36,7 +36,7 @@ public class TestDaoImpl extends AbstractDao<Test, Long> implements TestDao {
                 .createQuery("select p " +
                         "from Patient p " +
                         "inner join BloodTest b " +
-                        "on p.id = b .owner.id " +
+                        "on p.id = b .patient.id " +
                         "where b.glucose > :norma", Patient.class)
                 .setParameter("norma", normalLevel)
                 .getResultList();

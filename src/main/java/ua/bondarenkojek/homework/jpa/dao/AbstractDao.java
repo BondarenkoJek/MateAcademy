@@ -18,7 +18,7 @@ public abstract class AbstractDao<T, ID extends Serializable> implements CrudDao
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
         return read((ID) entityManager
-                .createQuery("select max(e.id) from " + clazz.getName() +" e", clazz));
+                .createQuery("select max (e.id) from " + clazz.getSimpleName() + " e").getSingleResult());
     }
 
     @Override

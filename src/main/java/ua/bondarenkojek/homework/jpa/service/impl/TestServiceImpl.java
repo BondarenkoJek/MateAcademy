@@ -49,9 +49,4 @@ public class TestServiceImpl implements TestService {
     public List<Patient> getPatientsWithGlucoseHigherThan(Double normalLevel) {
         return testDao.getPatientsWithGlucoseHigherThan(normalLevel);
     }
-
-    @Override
-    public void doTest(Test test, Patient patient) {
-
-    }
 }

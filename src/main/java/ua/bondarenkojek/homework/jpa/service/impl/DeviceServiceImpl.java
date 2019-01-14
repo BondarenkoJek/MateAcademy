@@ -1,8 +1,13 @@
 package ua.bondarenkojek.homework.jpa.service.impl;
 
 import ua.bondarenkojek.homework.jpa.dao.DeviceDao;
+import ua.bondarenkojek.homework.jpa.model.Patient;
 import ua.bondarenkojek.homework.jpa.model.device.Device;
+import ua.bondarenkojek.homework.jpa.model.test.Test;
 import ua.bondarenkojek.homework.jpa.service.DeviceService;
+import ua.bondarenkojek.homework.jpa.util.ResultTest;
+
+import java.time.LocalDate;
 
 public class DeviceServiceImpl implements DeviceService {
     private DeviceDao deviceDao;
@@ -29,5 +34,13 @@ public class DeviceServiceImpl implements DeviceService {
     @Override
     public void deleteDevice(Device device) {
         deviceDao.delete(device);
+    }
+
+    @Override
+    public void doTest(Test test, Patient patient) {
+        test.setDateOfCreate(LocalDate.now());
+        test.setResult(ResultTest.getResult());
+        patient.addTest(test);
+        addDevice(test.getDevice());
     }
 }

@@ -13,7 +13,6 @@ import ua.bondarenkojek.homework.jpa.service.TestService;
 import ua.bondarenkojek.homework.jpa.service.factory.ServiceFactory;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) {
@@ -25,28 +24,29 @@ public class Main {
                 .builder()
                 .name("Jek")
                 .dateOfBirth(LocalDate.of(1992, 1, 7))
-                .tests(new ArrayList<>())
                 .build();
 
         Test test1 = Test.getTest(Test.TestType.BLOOD);
         Device photometer = new Photometer();
         photometer.addAccessory(new PhotometerAccessory());
+        photometer.addTest(test1);
+        ds.doTest(test1, patient1);
         ds.addDevice(photometer);
-        photometer.doTest(test1, patient1);
+
         System.out.println(test1.getResult());
 
         Patient patient2 = Patient
                 .builder()
                 .name("Vasia")
                 .dateOfBirth(LocalDate.of(1997, 11, 5))
-                .tests(new ArrayList<>())
                 .build();
 
         Test test2 = Test.getTest(Test.TestType.SKIN);
         Device ultrasonic = new UltrasonicDevice();
         ultrasonic.addAccessory(new UltrasonicAccessory());
+        ultrasonic.addTest(test2);
         ds.addDevice(ultrasonic);
-        ultrasonic.doTest(test2, patient2);
+        ds.doTest(test2, patient2);
         System.out.println(test2.getResult());
 
         ps.addPatient(patient1);

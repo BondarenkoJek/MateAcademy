@@ -4,9 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ua.bondarenkojek.homework.jpa.model.Patient;
+import ua.bondarenkojek.homework.jpa.model.device.Device;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,19 +29,21 @@ public abstract class Test {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "test_id")
     private Long id;
+
     @Column(name = "date_of_create")
     private LocalDate dateOfCreate;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "patient_id")
-    private Patient owner;
 
-    public Test doTest(Patient patient) {
-        setOwner(patient);
-        patient.addTest(this);
-        return this;
-    }
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @JoinColumn(name = "device_id")
+    private Device device;
 
     public abstract Double getResult();
+
+    public abstract void setResult(Double result);
 
     public static Test getTest(TestType testType) {
         switch (testType) {

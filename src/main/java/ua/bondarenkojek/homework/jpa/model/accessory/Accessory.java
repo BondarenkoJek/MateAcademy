@@ -20,12 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "accessory")
+@Entity
+@Table(name = "accessory")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Accessory {
     @Id

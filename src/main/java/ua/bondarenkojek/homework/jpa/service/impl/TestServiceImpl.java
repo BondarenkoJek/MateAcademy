@@ -22,17 +22,17 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public Test readTest(Long id) {
-        return testDao.readEntity(id);
+        return testDao.read(id);
     }
 
     @Override
     public void updateTest(Test test) {
-        testDao.updateEntity(test);
+        testDao.update(test);
     }
 
     @Override
     public void deleteTest(Test test) {
-        testDao.deleteEntity(test);
+        testDao.delete(test);
     }
 
     @Override

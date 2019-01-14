@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,7 +25,8 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "patient")
+@Table(name = "patient")
+@Entity
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

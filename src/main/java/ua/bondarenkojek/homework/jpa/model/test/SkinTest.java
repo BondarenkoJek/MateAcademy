@@ -5,9 +5,11 @@ import ua.bondarenkojek.homework.jpa.model.Patient;
 import ua.bondarenkojek.homework.jpa.util.ResultTest;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
-@Entity(name = "skin_test")
+@Entity
+@Table(name = "skin_test")
 public class SkinTest extends Test {
     private Double skinProblems;
 

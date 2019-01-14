@@ -18,16 +18,16 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Device readDevice(Long id) {
-        return deviceDao.readEntity(id);
+        return deviceDao.read(id);
     }
 
     @Override
     public void updateDevice(Device device) {
-        deviceDao.updateEntity(device);
+        deviceDao.update(device);
     }
 
     @Override
     public void deleteDevice(Device device) {
-        deviceDao.deleteEntity(device);
+        deviceDao.delete(device);
     }
 }

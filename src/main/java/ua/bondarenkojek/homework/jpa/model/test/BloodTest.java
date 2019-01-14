@@ -5,9 +5,11 @@ import ua.bondarenkojek.homework.jpa.model.Patient;
 import ua.bondarenkojek.homework.jpa.util.ResultTest;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Data
-@Entity(name = "blood_test")
+@Entity
+@Table(name = "blood_test")
 public class BloodTest extends Test {
     private Double glucose;
 

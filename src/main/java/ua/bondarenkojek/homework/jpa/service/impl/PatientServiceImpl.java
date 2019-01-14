@@ -18,16 +18,16 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient readPatient(Long id) {
-        return patientDao.readEntity(id);
+        return patientDao.read(id);
     }
 
     @Override
     public void updatePatient(Patient patient) {
-        patientDao.updateEntity(patient);
+        patientDao.update(patient);
     }
 
     @Override
     public void deletePatient(Patient patient) {
-        patientDao.deleteEntity(patient);
+        patientDao.delete(patient);
     }
 }

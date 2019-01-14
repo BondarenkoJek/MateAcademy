@@ -9,42 +9,9 @@ import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.util.List;
 
-public class TestDaoImpl extends AbstractDao implements TestDao {
+public class TestDaoImpl extends AbstractDao<Test, Long> implements TestDao {
     public TestDaoImpl(EntityManager entityManager) {
-        super(entityManager);
-    }
-
-    @Override
-    public Long createEntity(Test entity) {
-        entityManager.getTransaction().begin();
-        entityManager.persist(entity);
-        entityManager.getTransaction().commit();
-        return (Long) entityManager
-                .createQuery("select t.id from test t order by t.id desc")
-                .setMaxResults(1)
-                .getSingleResult();
-    }
-
-    @Override
-    public Test readEntity(Long id) {
-        entityManager.getTransaction().begin();
-        Test test = entityManager.find(Test.class, id);
-        entityManager.getTransaction().commit();
-        return test;
-    }
-
-    @Override
-    public void updateEntity(Test entity) {
-        entityManager.getTransaction().begin();
-        entityManager.merge(entity);
-        entityManager.getTransaction().commit();
-    }
-
-    @Override
-    public void deleteEntity(Test entity) {
-        entityManager.getTransaction().begin();
-        entityManager.remove(entity);
-        entityManager.getTransaction().commit();
+        super(entityManager, Test.class);
     }
 
     @Override
@@ -67,8 +34,8 @@ public class TestDaoImpl extends AbstractDao implements TestDao {
     public List<Patient> getPatientsWithGlucoseHigherThan(Double normalLevel) {
         return entityManager
                 .createQuery("select p " +
-                        "from patient p " +
-                        "inner join blood_test b " +
+                        "from Patient p " +
+                        "inner join BloodTest b " +
                         "on p.id = b .owner.id " +
                         "where b.glucose > :norma", Patient.class)
                 .setParameter("norma", normalLevel)

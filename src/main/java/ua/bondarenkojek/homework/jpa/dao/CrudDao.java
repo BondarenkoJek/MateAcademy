@@ -1,11 +1,13 @@
 package ua.bondarenkojek.homework.jpa.dao;
 
-public interface CrudDao<T> {
-    Long createEntity(T entity);
+import java.io.Serializable;
 
-    T readEntity(Long id);
+public interface CrudDao<T, ID extends Serializable> {
+    T create(T entity);
 
-    void updateEntity(T entity);
+    T read(ID id);
 
-    void deleteEntity(T entity);
+    void update(T entity);
+
+    void delete(T entity);
 }

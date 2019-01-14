@@ -20,4 +20,6 @@ public interface TestService {
     List<Test> getAllTestsInDateRange(LocalDate from, LocalDate to);
 
     List<Patient> getPatientsWithGlucoseHigherThan(Double normalLevel);
+
+    void doTest(Test test, Patient patient);
 }

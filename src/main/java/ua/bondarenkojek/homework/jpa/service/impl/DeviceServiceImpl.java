@@ -12,12 +12,12 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
-    public Long createDevice(Device device) {
-        return deviceDao.createEntity(device);
+    public Device addDevice(Device device) {
+        return deviceDao.create(device);
     }
 
     @Override
-    public Device readDevice(Long id) {
+    public Device getDevice(Long id) {
         return deviceDao.read(id);
     }
 

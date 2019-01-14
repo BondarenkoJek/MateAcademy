@@ -16,12 +16,12 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public Long createTest(Test test) {
-        return testDao.createEntity(test);
+    public Test addTest(Test test) {
+        return testDao.create(test);
     }
 
     @Override
-    public Test readTest(Long id) {
+    public Test getTest(Long id) {
         return testDao.read(id);
     }
 
@@ -48,5 +48,10 @@ public class TestServiceImpl implements TestService {
     @Override
     public List<Patient> getPatientsWithGlucoseHigherThan(Double normalLevel) {
         return testDao.getPatientsWithGlucoseHigherThan(normalLevel);
+    }
+
+    @Override
+    public void doTest(Test test, Patient patient) {
+
     }
 }

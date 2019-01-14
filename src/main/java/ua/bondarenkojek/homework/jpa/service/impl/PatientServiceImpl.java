@@ -12,12 +12,12 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public Long createPatient(Patient patient) {
-        return patientDao.createEntity(patient);
+    public Patient addPatient(Patient patient) {
+        return patientDao.create(patient);
     }
 
     @Override
-    public Patient readPatient(Long id) {
+    public Patient getPatient(Long id) {
         return patientDao.read(id);
     }
 

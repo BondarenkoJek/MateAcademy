@@ -7,9 +7,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TestService {
-    Long createTest(Test test);
+    Test addTest(Test test);
 
-    Test readTest(Long id);
+    Test getTest(Long id);
 
     void updateTest(Test test);
 

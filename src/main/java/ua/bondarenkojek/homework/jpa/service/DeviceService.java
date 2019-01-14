@@ -3,9 +3,9 @@ package ua.bondarenkojek.homework.jpa.service;
 import ua.bondarenkojek.homework.jpa.model.device.Device;
 
 public interface DeviceService {
-    Long createDevice(Device device);
+    Device addDevice(Device device);
 
-    Device readDevice(Long id);
+    Device getDevice(Long id);
 
     void updateDevice(Device device);
 

@@ -1,5 +1,9 @@
 package ua.bondarenkojek.lessons.servlet;
 
+import ua.bondarenkojek.homework.jpa.model.Patient;
+import ua.bondarenkojek.homework.jpa.service.PatientService;
+import ua.bondarenkojek.homework.jpa.service.factory.ServiceFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,11 +14,11 @@ public class PatientInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        PatientService ps = new PatientServiceImpl(
-//                new PatientDaoImpl(HibernateUtil.getEntityManager()));
-//        Patient patient = ps.readPatient(1L);
-//
-//        req.setAttribute("patient", patient);
+        PatientService ps = ServiceFactory.getPatientService();
+
+        Patient patient = ps.getPatient(Long.parseLong(req.getParameter("id")));
+
+        req.setAttribute("patient", patient);
         req.getRequestDispatcher("/view/patient.jsp").forward(req, resp);
     }
 
@@ -22,4 +26,6 @@ public class PatientInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
     }
+
+//    private void getPatient()
 }

@@ -4,14 +4,33 @@
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!--<servlet>-->
+        <!--<servlet-name>patient</servlet-name>-->
+        <!--<servlet-class>ua.bondarenkojek.lessons.servlet.PatientInfoServlet</servlet-class>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>patient</servlet-name>-->
+        <!--<url-pattern>/patient</url-pattern>-->
+    <!--</servlet-mapping>-->
+
     <servlet>
-        <servlet-name>patient</servlet-name>
-        <servlet-class>ua.bondarenkojek.lessons.servlet.PatientInfoServlet</servlet-class>
+    <servlet-name>mainServlet</servlet-name>
+    <servlet-class>ua.bondarenkojek.homework.jdbc.web.MainServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>patient</servlet-name>
-        <url-pattern>/patient</url-pattern>
+    <servlet-name>mainServlet</servlet-name>
+    <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>mainServlet</servlet-name>
+        <url-pattern>/registration</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>mainServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 </web-app>

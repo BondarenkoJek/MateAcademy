@@ -1,22 +1,7 @@
-table {
-    border-collapse: collapse;
-}
-
-th {
-    padding: 3px; /* Поля вокруг содержимого таблицы */
-    border: 2px solid black; /* Параметры рамки */
-}
-
-td{
-    padding: 3px; /* Поля вокруг содержимого таблицы */
-    border: 1px solid black; /* Параметры рамки */
-}
-
-
-.form-style-8{
+.form{
     font-family: 'Open Sans Condensed', arial, sans;
     width: 500px;
-    padding: 30px;
+    padding: 30px 30px 15px;
     background: #FFFFFF;
     margin: 50px auto;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
@@ -24,7 +9,7 @@ td{
     -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
 }
 
-.form-style-8 h2{
+.form h2{
     background: #4D4D4D;
     text-transform: uppercase;
     font-family: 'Open Sans Condensed', sans-serif;
@@ -35,17 +20,25 @@ td{
     margin: -30px -30px 30px -30px;
 }
 
-.form-style-8 input[type="text"],
-.form-style-8 input[type="date"],
-.form-style-8 input[type="datetime"],
-.form-style-8 input[type="email"],
-.form-style-8 input[type="number"],
-.form-style-8 input[type="search"],
-.form-style-8 input[type="time"],
-.form-style-8 input[type="url"],
-.form-style-8 input[type="password"],
-.form-style-8 textarea,
-.form-style-8 select
+.form a{
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #797979;
+    font-size: 14px;
+    padding: 14px;
+}
+
+.form a:hover {
+    color: crimson;
+}
+
+.form .div_a {
+    padding: 15px 5px;
+}
+
+.form input[type="text"],
+.form input[type="date"],
+.form input[type="email"],
+.form input[type="password"]
 {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -62,13 +55,13 @@ td{
     height: 45px;
 }
 
-.form-style-8 textarea{
+.form textarea{
     resize:none;
     overflow: hidden;
 }
 
-.form-style-8 input[type="button"],
-.form-style-8 input[type="submit"]{
+.form input[type="button"],
+.form input[type="submit"]{
     -moz-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     -webkit-box-shadow: inset 0px 1px 0px 0px #45D6D6;
     box-shadow: inset 0px 1px 0px 0px #45D6D6;
@@ -84,8 +77,13 @@ td{
     text-transform: uppercase;
 }
 
-.form-style-8 input[type="button"]:hover,
-.form-style-8 input[type="submit"]:hover {
+.form input[type="button"]:hover,
+.form input[type="submit"]:hover {
     background:linear-gradient(to bottom, #34CACA 5%, #30C9C9 100%);
     background-color:#34CACA;
+}
+
+.alert-danger {
+    color: red;
+    margin-bottom: 10px;
 }

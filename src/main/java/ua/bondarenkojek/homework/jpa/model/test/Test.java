@@ -22,7 +22,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "test")
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Test {
     @Id

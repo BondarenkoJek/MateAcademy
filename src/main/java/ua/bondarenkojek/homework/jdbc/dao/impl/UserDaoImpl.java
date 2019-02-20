@@ -18,28 +18,28 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     @Override
     public void add(User user) {
         final String INSERT_USER =
-                "INSERT INTO users(login, password, email) VALUE(?, ?, ?)";
+                "INSERT INTO users(login, password, email, token) VALUE(?, ?, ?, ?)";
         save(INSERT_USER, user);
     }
 
     @Override
     public User getById(Long id) {
         final String SELECT_USER_BY_ID =
-                "SELECT login, password, email FROM users WHERE id = ?";
+                "SELECT * FROM users WHERE id = ?";
        return get(SELECT_USER_BY_ID, id);
     }
 
     @Override
     public User getByLogin(String login) {
         final String SELECT_USER_BY_LOGIN =
-                "SELECT login, password, email FROM users WHERE login = ?";
+                "SELECT * FROM users WHERE login = ?";
         return get(SELECT_USER_BY_LOGIN, login);
     }
 
     @Override
     public User getByToken(String token) {
         final String SELECT_USER_BY_TOKEN =
-                "SELECT login, password, email FROM users WHERE login = ?";
+                "SELECT * FROM users WHERE token = ?";
         return get(SELECT_USER_BY_TOKEN, token);
     }
 
@@ -47,7 +47,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     public void update(User user) {
         final String UPDATE_USER =
                 "UPDATE users " +
-                        "SET login=?, password=?, email=?" +
+                        "SET login=?, password=?, email=?, token=?" +
                         "WHERE id=?";
         save(UPDATE_USER, user);
     }
@@ -73,6 +73,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             statement.setString(1, user.getLogin());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
+            statement.setString(4, user.getToken());
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,10 +96,11 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     private User getUser(ResultSet rs) throws SQLException {
         if (rs.next()) {
             User user = User.builder()
-                    .id(rs.getLong("users.id"))
-                    .login(rs.getString("users.login"))
-                    .password(rs.getString("users.password"))
-                    .email(rs.getString("users.email"))
+                    .id(rs.getLong("id"))
+                    .login(rs.getString("login"))
+                    .password(rs.getString("password"))
+                    .email(rs.getString("email"))
+                    .token(rs.getString("token"))
                     .build();
             return user;
         }

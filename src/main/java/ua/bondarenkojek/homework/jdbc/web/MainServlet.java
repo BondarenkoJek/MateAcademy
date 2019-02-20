@@ -2,8 +2,6 @@ package ua.bondarenkojek.homework.jdbc.web;
 
 import ua.bondarenkojek.homework.jdbc.config.Factory;
 import ua.bondarenkojek.homework.jdbc.controller.Controller;
-import ua.bondarenkojek.homework.jdbc.controller.LoginController;
-import ua.bondarenkojek.homework.jdbc.controller.RegistrationController;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -20,11 +18,13 @@ public class MainServlet extends HttpServlet {
     private final static Map<Request, Controller> CONTROLLERS = new HashMap<>();
 
     static {
+        CONTROLLERS.put(Request.of("/error", GET), r -> ViewModel.of("error"));
         CONTROLLERS.put(Request.of("/", GET), r -> ViewModel.of("index"));
         CONTROLLERS.put(Request.of("/login", GET), r -> ViewModel.of("login"));
         CONTROLLERS.put(Request.of("/registration", GET), r -> ViewModel.of("registration"));
         CONTROLLERS.put(Request.of("/login", POST), Factory.getLoginController());
         CONTROLLERS.put(Request.of("/registration", POST), Factory.getRegistrationController());
+        CONTROLLERS.put(Request.of("/administrator", GET), r -> ViewModel.of("administrator"));
     }
 
     @Override
@@ -44,10 +44,21 @@ public class MainServlet extends HttpServlet {
         System.out.println(path);
         Map<String, String[]> parameterMap = req.getParameterMap();
         Request request = Request.of(path, Request.ofRequestMethod(req.getMethod()), parameterMap);
+
+        if (!CONTROLLERS.containsKey(request)) {
+            request.setUri("/error");
+            Controller controller = CONTROLLERS.get(request);
+            ViewModel vm = controller.process(request);
+            vm.addAttribute("error", "HTTP Status 404");
+            sendResponse(req, resp, vm);
+        }
+
         Controller controller = CONTROLLERS.get(request);
         ViewModel vm = controller.process(request);
         //TODO: should test
-        resp.addCookie(vm.getCookies().get(0));
+        if (!vm.getCookies().isEmpty()) {
+            resp.addCookie(vm.getCookies().get(0));
+        }
         sendResponse(req, resp, vm);
     }
 

@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class Request {
-    private String url;
+    private String uri;
     private RequestMethod method;
     private Map<String, String[]> params;
 
@@ -13,8 +13,8 @@ public class Request {
         POST
     }
 
-    public Request(String url, RequestMethod method, Map<String, String[]> params) {
-        this.url = url;
+    public Request(String uri, RequestMethod method, Map<String, String[]> params) {
+        this.uri = uri;
         this.method = method;
         this.params = params;
     }
@@ -35,17 +35,21 @@ public class Request {
         return params.get(name)[0];
     }
 
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Request request = (Request) o;
-        return Objects.equals(url, request.url) &&
+        return Objects.equals(uri, request.uri) &&
                 method == request.method;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(url, method);
+        return Objects.hash(uri, method);
     }
 }

@@ -20,7 +20,7 @@ public class RegistrationController implements Controller {
         String email = request.getParamByName("email");
         User user = User.builder()
                 .login(login)
-                .password(password)
+                .password(Encoder.encode(password))
                 .email(email)
                 .token(Encoder.encode(login + password))
                 .build();

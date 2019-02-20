@@ -11,7 +11,6 @@
 
     <!--<servlet-mapping>-->
         <!--<servlet-name>patient</servlet-name>-->
-        <!--<url-pattern>/patient</url-pattern>-->
     <!--</servlet-mapping>-->
 
     <servlet>
@@ -26,6 +25,11 @@
 
     <servlet-mapping>
         <servlet-name>mainServlet</servlet-name>
+        <url-pattern>/administrator</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>mainServlet</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
@@ -33,4 +37,14 @@
         <servlet-name>mainServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>user-filter</filter-name>
+        <filter-class>ua.bondarenkojek.homework.jdbc.web.filter.UserFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>user-filter</filter-name>
+        <servlet-name>mainServlet</servlet-name>
+    </filter-mapping>
 </web-app>

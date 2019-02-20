@@ -16,14 +16,14 @@ public class TestDaoImpl extends AbstractDao<Test, Long> implements TestDao {
 
     @Override
     public List<Test> getAllTests() {
-        return entityManager.createQuery("from test", Test.class).getResultList();
+        return entityManager.createQuery("from Test ", Test.class).getResultList();
     }
 
     @Override
     public List<Test> getAllTestsInDateRange(LocalDate from, LocalDate to) {
         return entityManager
                 .createQuery("select t " +
-                        "from test t " +
+                        "from Test t " +
                         "where t.dateOfCreate >= :frm and t.dateOfCreate <= :to", Test.class)
                 .setParameter("frm", from)
                 .setParameter("to", to)

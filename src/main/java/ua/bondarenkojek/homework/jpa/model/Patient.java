@@ -23,7 +23,6 @@ import java.util.Set;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "patient")
 @Entity
 public class Patient {
     @Id

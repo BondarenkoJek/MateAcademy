@@ -31,6 +31,8 @@ public class Main {
         ProjectService projectService = new ProjectServiceImpl(new ProjectDaoImpl(connection));
         DeveloperService developerService = new DeveloperServiceImpl(new DeveloperDaoImpl(connection));
 
+        System.out.println(developerService.getDeveloperById(8));
+
 //        Customer customer = Customer
 //                .builder()
 //                .id(2)

@@ -25,7 +25,7 @@ public class UserFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         userDao = Factory.getUserDao();
-        protectedUrl.put("/administrator", new Role("Admin"));
+        protectedUrl.put("/administrator", new Role(2L,"Admin"));
     }
 
     @Override
@@ -56,8 +56,6 @@ public class UserFilter implements Filter {
             }
         } else {
             User user = userDao.getByToken(token);
-            //TODO: mock
-            user.setRole(new Role("User"));
 
             if (user == null) {
                 processUnauthorized(req, resp);
@@ -68,15 +66,13 @@ public class UserFilter implements Filter {
                     if (verifyRole(user, path)) {
                         processAuthorized(req, resp, filterChain);
                     } else {
-                        processDenied(req, resp, filterChain);
+                        processDenied(req, resp);
                     }
             }
         }
     }
 
-    private void processDenied(ServletRequest req,
-                               ServletResponse resp,
-                               FilterChain chain) throws ServletException, IOException {
+    private void processDenied(ServletRequest req, ServletResponse resp) throws ServletException, IOException {
         String redirectURL = "/WEB-INF/view/error.jsp";
         req.setAttribute("error", "HTTP Status 403");
         req.getRequestDispatcher(redirectURL).forward(req, resp);
@@ -84,10 +80,7 @@ public class UserFilter implements Filter {
 
     private boolean verifyRole(User user, String path) {
         Role role = protectedUrl.get(path);
-        if (role == null) {
-            return true;
-        }
-        return role.equals(user.getRole());
+        return role == null ? true : user.getRoles().contains(role);
     }
 
     @Override
@@ -101,8 +94,16 @@ public class UserFilter implements Filter {
         chain.doFilter(req, resp);
     }
 
-    private void processUnauthorized(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String redirectURL = "/WEB-INF/view/login.jsp";
-        req.getRequestDispatcher(redirectURL).forward(req, resp);
+    private void processUnauthorized(HttpServletRequest req,
+                                     HttpServletResponse resp) throws ServletException, IOException {
+//        String redirectURL = "/WEB-INF/view/login.jsp";
+//        req.getRequestDispatcher(redirectURL).forward(req, resp);
+        String path = req.getServletPath();
+        String uri = "/login";
+        if (!path.equals("/login")) {
+            uri = String.format("/login?from=%s", path);
+        }
+
+        resp.sendRedirect(uri);
     }
 }

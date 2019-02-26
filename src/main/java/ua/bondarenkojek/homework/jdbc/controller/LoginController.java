@@ -22,6 +22,7 @@ public class LoginController implements Controller {
             return ViewModel.of("login");
         String userToken = user.getToken();
         Cookie cookie = new Cookie("MATE", userToken);
+//        ViewModel vm = ViewModel.of(request.getParamByName("from"));
         ViewModel vm = ViewModel.of("index");
         vm.addCookie(cookie);
         return vm;

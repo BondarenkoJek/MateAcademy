@@ -2,12 +2,15 @@ package ua.bondarenkojek.homework.jdbc.dao.impl;
 
 import ua.bondarenkojek.homework.jdbc.dao.AbstractDao;
 import ua.bondarenkojek.homework.jdbc.dao.UserDao;
+import ua.bondarenkojek.homework.jdbc.model.Role;
 import ua.bondarenkojek.homework.jdbc.model.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserDaoImpl extends AbstractDao implements UserDao {
 
@@ -24,23 +27,17 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
 
     @Override
     public User getById(Long id) {
-        final String SELECT_USER_BY_ID =
-                "SELECT * FROM users WHERE id = ?";
-       return get(SELECT_USER_BY_ID, id);
+        return getUser(id, "users.id");
     }
 
     @Override
     public User getByLogin(String login) {
-        final String SELECT_USER_BY_LOGIN =
-                "SELECT * FROM users WHERE login = ?";
-        return get(SELECT_USER_BY_LOGIN, login);
+        return getUser(login, "users.login");
     }
 
     @Override
     public User getByToken(String token) {
-        final String SELECT_USER_BY_TOKEN =
-                "SELECT * FROM users WHERE token = ?";
-        return get(SELECT_USER_BY_TOKEN, token);
+        return getUser(token, "users.token");
     }
 
     @Override
@@ -80,13 +77,19 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
         }
     }
 
-    private User get(String sql, Object param) {
+    private User getUser(Object param, String conditional) {
+        final String SELECT_USER = String.format("SELECT * " +
+                "FROM users " +
+                "INNER JOIN users_roles ON users.id = users_roles.user_id " +
+                "INNER JOIN roles ON users_roles.role_id = roles.id " +
+                "WHERE %s = ?;", conditional);
         try {
-            PreparedStatement statement = connection.prepareStatement(sql);
+            PreparedStatement statement = connection.prepareStatement(SELECT_USER);
             statement.setObject(1, param);
             ResultSet rs = statement.executeQuery();
-
-            return getUser(rs);
+            if (rs.next()) {
+                return getUser(rs);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,16 +97,24 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     private User getUser(ResultSet rs) throws SQLException {
-        if (rs.next()) {
-            User user = User.builder()
-                    .id(rs.getLong("id"))
-                    .login(rs.getString("login"))
-                    .password(rs.getString("password"))
-                    .email(rs.getString("email"))
-                    .token(rs.getString("token"))
-                    .build();
-            return user;
-        }
-        return null;
+
+        return User.builder()
+                .id(rs.getLong("users.id"))
+                .login(rs.getString("login"))
+                .password(rs.getString("password"))
+                .email(rs.getString("email"))
+                .token(rs.getString("token"))
+                .roles(getRoles(rs))
+                .build();
+    }
+
+    private Set<Role> getRoles(ResultSet rs) throws SQLException {
+        Set<Role> roles = new HashSet<>();
+        do {
+            roles.add(new Role(
+                    rs.getLong("roles.id"),
+                    rs.getString("name")));
+        } while (rs.next());
+        return roles;
     }
 }

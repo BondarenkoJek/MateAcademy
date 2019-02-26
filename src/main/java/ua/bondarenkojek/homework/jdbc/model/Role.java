@@ -5,9 +5,14 @@ import lombok.Data;
 @Data
 public class Role {
     private Long id;
-    private String role;
+    private String name;
 
-    public Role(String role) {
-        this.role = role;
+    public Role(String name) {
+        this.name = name;
+    }
+
+    public Role(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 }
